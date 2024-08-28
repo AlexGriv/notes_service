@@ -7,8 +7,9 @@ from app.models import Note
 from app.schemas import NoteCreate
 
 
-async def create_note(new_note: NoteCreate,
-                      session: AsyncSession,
+async def create_note(
+    new_note: NoteCreate,
+    session: AsyncSession,
 ) -> Note:
     new_note_data = new_note.dict()
     #for word in new_note_data['description']:
@@ -28,10 +29,6 @@ async def create_note(new_note: NoteCreate,
     return db_note
 
 
-async def get_all_notes(
-        session: AsyncSession,
-) -> list:
-    stmt = select(Note)
-    result = await session.execute(stmt)
-    notes = result.scalars().all()
-    return notes
+async def get_all_notes(session: AsyncSession, ) -> list[NoteCreate]:
+    result = await session.execute(select(Note))
+    return result.scalars().all()
