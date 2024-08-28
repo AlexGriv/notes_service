@@ -3,9 +3,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import get_async_session
-
+from app.core.user import auth_backend, fastapi_users
+from app.schemas import UserCreate, UserRead, UserUpdate, NoteCreate
 from app.crud import create_note, get_all_notes
-from app.schemas import NoteCreate
 
 router = APIRouter()
 
@@ -35,3 +35,22 @@ async def get_all(session: AsyncSession = Depends(get_async_session)):
         raise HTTPException(status_code=404, detail="Notes not found")
 
     return notes
+
+
+from fastapi import APIRouter
+
+router.include_router(
+    fastapi_users.get_auth_router(auth_backend),
+    prefix='/auth/jwt',
+    tags=['auth'],
+)
+router.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix='/auth',
+    tags=['auth'],
+)
+router.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate),
+    prefix='/users',
+    tags=['users'],
+)

@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from fastapi_users import schemas
 
 
 class NoteCreate(BaseModel):
@@ -7,3 +8,15 @@ class NoteCreate(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserRead(schemas.BaseUser[int]):
+    pass
+
+
+class UserCreate(schemas.BaseUserCreate):
+    pass
+
+
+class UserUpdate(schemas.BaseUserUpdate):
+    pass
