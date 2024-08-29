@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  notes:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - MODULE_NAME=main
+      - VARIABLE_NAME=app

@@ -16,6 +16,7 @@ router = APIRouter()
     '/new_note/',
     response_model_exclude_none=True,
     response_model_exclude_defaults=True,
+    tags=['note'],
 )
 async def create_new_note(
         note: NoteCreate,
@@ -30,6 +31,7 @@ async def create_new_note(
     '/all/',
     response_model=list[NoteCreate],
     response_model_exclude_none=True,
+    tags=['note'],
 )
 async def get_all(
         session: AsyncSession = Depends(get_async_session),
