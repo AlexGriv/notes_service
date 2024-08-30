@@ -23,6 +23,7 @@ docker-compose down
 docker-compose run fastapi alembic revision --autogenerate -m "Initial migration"
 docker-compose run fastapi alembic upgrade head
 docker-compose up --build
+```
 
 Доступ к API
 После запуска зайдите на http://localhost:8000/docs#/, чтобы ознакомиться с документацией API.
