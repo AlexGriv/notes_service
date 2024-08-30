@@ -1,6 +1,8 @@
 # Проект notes_service (тестовое задание)
 ## Задание
-
+Необходимо спроектировать и реализовать на Python сервис,
+предоставляющий REST API  интерфейс с методамидобавление заметок
+вывод списка заметок.
 
 ## Технологии
 Fastapi
@@ -14,9 +16,9 @@ Git Hooks
 git clone https://github.com/AlexGriv/notes_service.git
 
 docker-compose up --build
+docker-compose down
 docker-compose run fastapi alembic revision --autogenerate -m "Initial migration"
 docker-compose run fastapi alembic upgrade head
-docker-compose down
 docker-compose up --build
 
 Зайдите на http://localhost:8000/docs#/
