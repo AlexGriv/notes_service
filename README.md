@@ -1,19 +1,22 @@
-# Проект notes_service (тестовое задание)
-## Задание
-Необходимо спроектировать и реализовать на Python сервис,
-предоставляющий REST API  интерфейс с методамидобавление заметок
-вывод списка заметок.
+# Проект notes_service
+
+## Описание
+`notes_service` - это REST API сервис для создания и управления заметками. Проект реализован на Python с использованием FastAPI, и включает аутентификацию, а также проверку орфографии с помощью Яндекс.Спеллер.
 
 ## Технологии
-Fastapi
-PostgreSQL
-YAPF (Yet Another Python Formatter)
-Git Hooks
-Яндекс.Спеллер
+- **FastAPI** - современный веб-фреймворк для создания API на Python.
+- **PostgreSQL** - реляционная база данных для хранения заметок.
+- **YAPF** (Yet Another Python Formatter) - инструмент для форматирования кода.
+- **Git Hooks** - скрипты, которые запускаются на определённых стадиях работы с Git.
+- **Яндекс.Спеллер** - сервис для проверки орфографии.
 
-Выполните команды:
-```
+## Установка и запуск
+
+### Клонирование репозитория
+```bash
 git clone https://github.com/AlexGriv/notes_service.git
+cd notes_service
+
 
 docker-compose up --build
 docker-compose down
@@ -21,21 +24,21 @@ docker-compose run fastapi alembic revision --autogenerate -m "Initial migration
 docker-compose run fastapi alembic upgrade head
 docker-compose up --build
 
-Зайдите на http://localhost:8000/docs#/
-Создайте пользователя
-POST
-auth
-/auth/register
-Получите токен Bearer например для Postman
-/auth/jwt/login
+Доступ к API
+После запуска зайдите на http://localhost:8000/docs#/, чтобы ознакомиться с документацией API.
 
-Авторизирйтесь Authorize
+Примеры использования API
+Регистрация пользователя
+POST /auth/register
 
-POST
-/new_note/ Создать сообщение, сообщения проверяются и справляются сервисом Яндекс.Спеллер.
+Получение токена
+POST /auth/jwt/login
 
-GET
-/all/ Получить список своих сообщений (суперпользователь видит сообщения всех пользователей)
+Создание заметки
+POST /new_note/ Заметка проверяется и исправляется с помощью сервиса Яндекс.Спеллер.
+
+Получение списка заметок
+GET /all/ Возвращает список заметок пользователя. Суперпользователь видит заметки всех пользователей.
 
 ```
 
