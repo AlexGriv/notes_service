@@ -1,12 +1,27 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  notes:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dbname
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"  # This line allows external access to the database if needed
+
+  fastapi:
     build: .
+    environment:
+      APP_TITLE: Сервис заметок
+      DATABASE_URL: postgresql+asyncpg://user:password@db:5432/dbname
+      SECRET: uyfdifod454kj4l5k454g
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
-    environment:
-      - MODULE_NAME=main
-      - VARIABLE_NAME=app
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
