@@ -4,19 +4,19 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: dbname
+      POSTGRES_USER: user123
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: dbname123
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"  # This line allows external access to the database if needed
+      - "5432:5432"
 
   fastapi:
     build: .
     environment:
       APP_TITLE: Сервис заметок
-      DATABASE_URL: postgresql+asyncpg://user:password@db:5432/dbname
+      DATABASE_URL: postgresql+asyncpg://user123:password123@db:5432/dbname123
       SECRET: uyfdifod454kj4l5k454g
     ports:
       - "8000:8000"
