@@ -11,7 +11,7 @@ Git Hooks
 
 Выполните команды:
 ```
-
+git clone https://github.com/AlexGriv/notes_service.git
 
 docker-compose up --build
 docker-compose run fastapi alembic revision --autogenerate -m "Initial migration"
